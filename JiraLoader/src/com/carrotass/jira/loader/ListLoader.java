@@ -1,6 +1,6 @@
-package com.carrotass.jiraparser;
+package com.carrotass.jira.loader;
 
-public class BaseJiraParser {
+public class ListLoader {
 	
 	public static String GetHelloWorldString() {
 		return "Hello world from parser!";

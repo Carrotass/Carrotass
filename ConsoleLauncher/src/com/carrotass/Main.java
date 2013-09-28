@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import com.carrotass.preferences.JiraLoginPreferences;
+import com.carrotass.jira.Jira.JiraType;
+import com.carrotass.jira.JiraPreferences;
 
 public class Main {
+	
+	private static JiraPreferences jiraPreferences = new JiraPreferences();
 
 	public static void main(String[] args) {
 		try {
@@ -29,6 +32,12 @@ public class Main {
 					case 3:
 						ShowJiraCredentials();
 						break;
+					case 4:
+						EneterJiraPaths();
+						break;
+					case 5:
+						ShowJiraPaths();
+						break;
 					default:
 						System.out.println("Unrecognized option, please try again");
 						break;
@@ -48,8 +57,10 @@ public class Main {
 	public static ArrayList<String> GetMenuActions() {
 		ArrayList<String> menuActions = new ArrayList<>();
 		menuActions.add("1. Say hello");
-		menuActions.add("2. Enter Jira credentials");
-		menuActions.add("3. Show Jira credentials");
+		menuActions.add("2. Enter Jira's credentials");
+		menuActions.add("3. Show Jira's credentials");
+		menuActions.add("4. Enter Jira's paths");
+		menuActions.add("5. Show Jira's paths");
 		menuActions.add("0. Exit");
 		return menuActions;
 	}
@@ -63,12 +74,31 @@ public class Main {
 		String login = new BufferedReader(new InputStreamReader(System.in)).readLine();
 		System.out.println("Enter password");
 		String password = new BufferedReader(new InputStreamReader(System.in)).readLine();
-		JiraLoginPreferences preferences = new JiraLoginPreferences();
-		preferences.setCredentials(login, password);
+		jiraPreferences.setCredentials(login, password);
 	}
 
 	private static void ShowJiraCredentials() {
-		JiraLoginPreferences preferences = new JiraLoginPreferences();
-		System.out.println(String.format("Login: %s, password: %s", preferences.getUsername(), preferences.getPassword()));
+		System.out.println(String.format("Login: %s, password: %s", jiraPreferences.getUsername(), jiraPreferences.getPassword()));
+	}
+	
+	private static void ShowJiraPaths() {
+		System.out.println(String.format("Inernal Jira:\n%s\nExternal Jira:\n%s\nRigentJira:\n%s", 
+				jiraPreferences.getJiraPath(JiraType.InternalJira),
+				jiraPreferences.getJiraPath(JiraType.ExternalJira),
+				jiraPreferences.getJiraPath(JiraType.RigentJira)));
+	}
+
+	private static void EneterJiraPaths() throws IOException {
+		System.out.println("Enter internal jira path");
+		String internalJiraPath = new BufferedReader(new InputStreamReader(System.in)).readLine();
+		System.out.println("Enter external jira path");
+		String externalJiraPath = new BufferedReader(new InputStreamReader(System.in)).readLine();
+		System.out.println("Enter rigent jira path");
+		String rigentJiraPath = new BufferedReader(new InputStreamReader(System.in)).readLine();
+		
+		jiraPreferences.setJiraPath(JiraType.InternalJira, internalJiraPath);
+		jiraPreferences.setJiraPath(JiraType.ExternalJira, externalJiraPath);
+		jiraPreferences.setJiraPath(JiraType.RigentJira, rigentJiraPath);
+		
 	}
 }
