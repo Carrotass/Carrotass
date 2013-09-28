@@ -2,6 +2,7 @@ package com.carrotass;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
@@ -44,6 +45,9 @@ public class Main {
 					case 6:
 						LoginToJira();
 						break;
+					case 7:
+						GetIssuesList();
+						break;
 					default:
 						System.out.println("Unrecognized option, please try again");
 						break;
@@ -57,6 +61,7 @@ public class Main {
 			}
 		} catch (Exception e) {
 			System.out.println(String.format("Error occured: %s. Now exiting.", e.getLocalizedMessage()));
+			e.printStackTrace();
 		}
 	}
 	
@@ -68,6 +73,7 @@ public class Main {
 		menuActions.add("4. Enter Jira's paths");
 		menuActions.add("5. Show Jira's paths");
 		menuActions.add("6. Login to Jira");
+		menuActions.add("7. Get issues list");
 		menuActions.add("0. Exit");
 		return menuActions;
 	}
@@ -113,5 +119,15 @@ public class Main {
 		System.out.println("Enter jira name [InternalJira, ExternalJira, RigentJira]");
 		String jiraName = new BufferedReader(new InputStreamReader(System.in)).readLine();
 		jiraWorker.Login(JiraType.valueOf(jiraName));
+	}
+	
+	private static void GetIssuesList() throws Exception {
+		System.out.println("Enter jira name [InternalJira, ExternalJira, RigentJira]");
+		String jiraName = new BufferedReader(new InputStreamReader(System.in)).readLine();
+		InputStream stream = jiraWorker.LoadIssuesListThisMonth(JiraType.valueOf(jiraName));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+		while (reader.ready()) {
+			System.out.println(reader.readLine());
+		}
 	}
 }
