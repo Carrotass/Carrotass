@@ -8,7 +8,7 @@ public class Jira {
 	}
 	
 	public enum JiraVersion {
-		version4(4), version5(5), version6(6);
+		VERSION_3(3), VERSION_4(4), VERSION_5(5);
 		
 		private final int version;
 		private JiraVersion(int version) { this.version = version; }
@@ -17,13 +17,13 @@ public class Jira {
 	
 	public static JiraVersion getJiraVersionByType(JiraType type) {
 		if (type == JiraType.InternalJira) {
-			return JiraVersion.version4;
+			return JiraVersion.VERSION_3;
 		}
 		if (type == JiraType.ExternalJira) {
-			return JiraVersion.version5;
+			return JiraVersion.VERSION_4;
 		}
 		if (type == JiraType.RigentJira) {
-			return JiraVersion.version6;
+			return JiraVersion.VERSION_5;
 		}
 		return null;
 	}

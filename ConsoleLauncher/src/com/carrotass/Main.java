@@ -125,9 +125,18 @@ public class Main {
 		System.out.println("Enter jira name [InternalJira, ExternalJira, RigentJira]");
 		String jiraName = new BufferedReader(new InputStreamReader(System.in)).readLine();
 		InputStream stream = jiraWorker.LoadIssuesListThisMonth(JiraType.valueOf(jiraName));
+		StringBuilder content = new StringBuilder();
+		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-		while (reader.ready()) {
-			System.out.println(reader.readLine());
+		String line = "";
+		
+		do {
+			line = reader.readLine();
+			if (line != null)
+				content.append(line + "\n");
 		}
+		while (line != null);
+		
+		System.out.println(content.toString());
 	}
 }

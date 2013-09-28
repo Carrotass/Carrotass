@@ -8,7 +8,7 @@ import java.util.List;
 public class QueryHelper {
 	
 	public static String formatStringToURL(String source) throws Exception {
-		return URLEncoder.encode(source, "UTF-8");
+		return URLEncoder.encode(source, "UTF-8").replace("+", "%2F");
 	}
 	
 	public static URLConnection PrepareConnection(String request, List<String> cookies) throws Exception {

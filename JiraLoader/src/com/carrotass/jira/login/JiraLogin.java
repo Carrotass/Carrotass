@@ -18,6 +18,7 @@ public class JiraLogin {
 		String request = String.format("%s%s?os_username=%s&os_password=%s", 
 				jiraPath, LoginPath, QueryHelper.formatStringToURL(username),
 				QueryHelper.formatStringToURL(password));
+		System.out.println("login to: " + request);
 		HttpURLConnection connection = (HttpURLConnection) QueryHelper.PrepareConnection(request, null);
 		
 		int response = connection.getResponseCode();

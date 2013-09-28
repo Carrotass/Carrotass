@@ -25,14 +25,14 @@ abstract public class ListLoader {
 	public static ListLoader CreateInstance(JiraType jiraType, LoginResponse loginResponse) {
 		ListLoader instance = null;
 		JiraVersion jiraVersion = Jira.getJiraVersionByType(jiraType);
-		if (jiraVersion == JiraVersion.version4) {
+		if (jiraVersion == JiraVersion.VERSION_3) {
+			instance = new ListLoaderVersion3();
+		}
+		else if (jiraVersion == JiraVersion.VERSION_4) {
 			instance = new ListLoaderVersion4();
 		}
-		else if (jiraVersion == JiraVersion.version5) {
+		else if (jiraVersion == JiraVersion.VERSION_5) {
 			instance = new ListLoaderVersion5();
-		}
-		else if (jiraVersion == JiraVersion.version6) {
-			instance = new ListLoaderVersion6();
 		}
 		instance.jiraType = jiraType;
 		instance.loginResponse = loginResponse;
@@ -41,7 +41,10 @@ abstract public class ListLoader {
 	
 	public InputStream LoadList(JiraFilter filter) throws Exception {
 		String requestURLString = getRequestURLString();
-		String queryString = buildQueryFromParams(getQueryParams(filter));
+		ArrayList<String[]> paramsList = getQueryParams(filter);
+		paramsList.add(new String[] {"field", "key"});
+		paramsList.add(new String[] {"field", "summary"});
+		String queryString = buildQueryFromParams(paramsList);
 		
 		String request = jiraPreferences.getJiraPath(jiraType) + requestURLString + "?" + queryString;
 		System.out.println(request);
@@ -52,17 +55,28 @@ abstract public class ListLoader {
 		return in;
 	}
 	
-	abstract ArrayList<String> getQueryParams(JiraFilter filter) throws Exception;
+	abstract ArrayList<String[]> getQueryParams(JiraFilter filter) throws Exception;
 	
 	abstract String getRequestURLString();
 	
-	protected String buildQueryFromParams(ArrayList<String> params) throws Exception {
+	protected String buildQueryFromParams(ArrayList<String[]> params) throws Exception {
 		StringBuilder builder = new StringBuilder();
 		for (int i=0;i<params.size();i++) {
 			if (i>0) {
 				builder.append("&");
 			}
-			builder.append(QueryHelper.formatStringToURL(params.get(i)));
+			String[] param = params.get(i);
+			String paramName = QueryHelper.formatStringToURL(param[0]);
+			
+			builder.append(paramName.replaceAll("%2B", "+"));
+			if (param.length > 1)
+			{
+				builder.append("=");
+				String paramValue = QueryHelper.formatStringToURL(param[1]);
+				System.out.println("paramvalue before: " + paramValue);
+				System.out.println("paramvalue after: " + paramValue.replaceAll("%2B", "+"));
+				builder.append(paramValue.replaceAll("%2B", "+"));
+			}
 		}
 		return builder.toString();
 	}
