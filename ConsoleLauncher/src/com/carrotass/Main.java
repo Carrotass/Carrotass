@@ -7,10 +7,13 @@ import java.util.ArrayList;
 
 import com.carrotass.jira.Jira.JiraType;
 import com.carrotass.jira.JiraPreferences;
+import com.carrotass.jira.JiraWorker;
 
 public class Main {
 	
 	private static JiraPreferences jiraPreferences = new JiraPreferences();
+	
+	private static JiraWorker jiraWorker = new JiraWorker();
 
 	public static void main(String[] args) {
 		try {
@@ -38,6 +41,9 @@ public class Main {
 					case 5:
 						ShowJiraPaths();
 						break;
+					case 6:
+						LoginToJira();
+						break;
 					default:
 						System.out.println("Unrecognized option, please try again");
 						break;
@@ -61,6 +67,7 @@ public class Main {
 		menuActions.add("3. Show Jira's credentials");
 		menuActions.add("4. Enter Jira's paths");
 		menuActions.add("5. Show Jira's paths");
+		menuActions.add("6. Login to Jira");
 		menuActions.add("0. Exit");
 		return menuActions;
 	}
@@ -100,5 +107,11 @@ public class Main {
 		jiraPreferences.setJiraPath(JiraType.ExternalJira, externalJiraPath);
 		jiraPreferences.setJiraPath(JiraType.RigentJira, rigentJiraPath);
 		
+	}
+	
+	private static void LoginToJira() throws Exception {
+		System.out.println("Enter jira name [InternalJira, ExternalJira, RigentJira]");
+		String jiraName = new BufferedReader(new InputStreamReader(System.in)).readLine();
+		jiraWorker.Login(JiraType.valueOf(jiraName));
 	}
 }
