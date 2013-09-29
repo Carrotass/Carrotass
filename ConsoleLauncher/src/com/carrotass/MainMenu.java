@@ -29,7 +29,7 @@ public class MainMenu {
 		int result = EXIT;
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-			writeLine(String.format("[%d-%d]: ", 0, actions.size()-1));
+			writeLine(String.format("[%d-%d]: ", 0, actions.size() - 1));
 			try {
 				result = Integer.parseInt(br.readLine());
 			} catch (NumberFormatException nfe) {

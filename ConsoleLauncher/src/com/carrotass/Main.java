@@ -53,8 +53,7 @@ public class Main {
 						break;
 					}
 				}
-				else
-				{
+				else {
 					needExit = true;
 					System.out.println("Exiting");
 				}
@@ -125,18 +124,11 @@ public class Main {
 		System.out.println("Enter jira name [InternalJira, ExternalJira, RigentJira]");
 		String jiraName = new BufferedReader(new InputStreamReader(System.in)).readLine();
 		InputStream stream = jiraWorker.LoadIssuesListThisMonth(JiraType.valueOf(jiraName));
-		StringBuilder content = new StringBuilder();
 		
-		BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-		String line = "";
+		ArrayList<String> issues = jiraWorker.ConvertIssuesListFromXMLToArrayOfNames(stream);
 		
-		do {
-			line = reader.readLine();
-			if (line != null)
-				content.append(line + "\n");
+		for (String issue : issues) {
+			System.out.println(issue);
 		}
-		while (line != null);
-		
-		System.out.println(content.toString());
 	}
 }

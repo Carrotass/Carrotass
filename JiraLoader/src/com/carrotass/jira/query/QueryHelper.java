@@ -17,8 +17,8 @@ public class QueryHelper {
 		
 		if (cookies != null) {
 			StringBuilder cookiesString = new StringBuilder();
-			for (int i=0;i<cookies.size(); i++) {
-				if (i>0) {
+			for (int i = 0; i<cookies.size(); i++) {
+				if (i > 0) {
 					cookiesString.append(";");
 				}
 				cookiesString.append(cookies.get(i));
