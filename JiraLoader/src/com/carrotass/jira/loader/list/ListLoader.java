@@ -1,4 +1,4 @@
-package com.carrotass.jira.loader;
+package com.carrotass.jira.loader.list;
 
 import java.io.InputStream;
 import java.net.URLConnection;

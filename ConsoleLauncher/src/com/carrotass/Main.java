@@ -48,6 +48,9 @@ public class Main {
 					case 7:
 						GetIssuesList();
 						break;
+					case 8:
+						ShowIssue();
+						break;
 					default:
 						System.out.println("Unrecognized option, please try again");
 						break;
@@ -73,6 +76,7 @@ public class Main {
 		menuActions.add("5. Show Jira's paths");
 		menuActions.add("6. Login to Jira");
 		menuActions.add("7. Get issues list");
+		menuActions.add("8. Show issue");
 		menuActions.add("0. Exit");
 		return menuActions;
 	}
@@ -129,6 +133,19 @@ public class Main {
 		
 		for (String issue : issues) {
 			System.out.println(issue);
+		}
+	}
+	
+	private static void ShowIssue() throws Exception {
+		System.out.println("Enter issue number");
+		String issueNumber = new BufferedReader(new InputStreamReader(System.in)).readLine();
+		InputStream stream = jiraWorker.LoadIssueByNumber(issueNumber);
+		BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+		String line = reader.readLine();
+		while (line != null)
+		{
+			System.out.println(line);
+			line = reader.readLine();
 		}
 	}
 }

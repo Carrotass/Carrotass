@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.carrotass.jira.Jira.JiraType;
-import com.carrotass.jira.loader.ListLoader;
+import com.carrotass.jira.loader.issue.IssueLoader;
+import com.carrotass.jira.loader.list.ListLoader;
 import com.carrotass.jira.login.JiraLogin;
 import com.carrotass.jira.login.LoginResponse;
 import com.carrotass.jira.query.JiraFilter;
@@ -42,6 +43,15 @@ public class JiraWorker {
 		ListLoader loader = ListLoader.CreateInstance(jiraType, loggedIn.get(jiraType));
 		JiraFilter filter = JiraFilter.FromMonthStartToNow();
 		return loader.LoadList(filter);
+	}
+	
+	public InputStream LoadIssueByNumber(String issueNumber) throws Exception {
+		JiraType jiraType = Jira.GetJiraTypeByIssueNumber(issueNumber);
+		if (!isLoggedIn(jiraType)) {
+			Login(jiraType);
+		}
+		IssueLoader loader = new IssueLoader(loggedIn.get(jiraType));
+		return loader.GetIssue(issueNumber);
 	}
 
 	public ArrayList<String> ConvertIssuesListFromXMLToArrayOfNames(InputStream stream) throws Exception {

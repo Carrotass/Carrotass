@@ -1,10 +1,10 @@
-package com.carrotass.jira.loader;
+package com.carrotass.jira.loader.list;
 
 import java.util.ArrayList;
 
 import com.carrotass.jira.query.JiraFilter;
 
-public class ListLoaderVersion4 extends ListLoader {
+public class ListLoaderVersion5 extends ListLoader {
 
 	@Override
 	ArrayList<String[]> getQueryParams(JiraFilter filter) {
