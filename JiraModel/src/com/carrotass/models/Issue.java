@@ -86,6 +86,16 @@ public class Issue {
 	public void setResolvedOn(Date resolvedOn) {
 		this.resolvedOn = resolvedOn;
 	}
+	
+	private Date updateOn;
+	
+	public Date getUpdateOn() {
+		return updateOn;
+	}
+
+	public void setUpdateOn(Date updateOn) {
+		this.updateOn = updateOn;
+	}
 
 	private User createdBy;
 	
