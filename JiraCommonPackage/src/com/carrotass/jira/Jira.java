@@ -13,6 +13,19 @@ public class Jira {
 		private final int version;
 		private JiraVersion(int version) { this.version = version; }
 		public int getVersion() { return version; }
+		
+		public static boolean IsValidJiraVersion(Integer num) 
+		{
+		    for (JiraVersion v : JiraVersion.values()) 
+		    {
+		        if (v.version == num) 
+		        {
+		            return true;
+		        }
+		    }
+		    return false;
+		}
+		
 	}
 	
 	public static JiraVersion getJiraVersionByType(JiraType type) {
@@ -27,6 +40,19 @@ public class Jira {
 		}
 		return null;
 	}
+	
+	public static JiraType GetJiraTypeByJiraVersion(Integer version) {
+		if (version == JiraVersion.VERSION_3.version) {
+			return JiraType.InternalJira;
+		}
+		if (version == JiraVersion.VERSION_4.version) {
+			return JiraType.ExternalJira;
+		}
+		if (version == JiraVersion.VERSION_5.version) {
+			return JiraType.RigentJira;
+		}
+		return null;
+	}	
 	
 	public static JiraType GetJiraTypeByIssueNumber(String issueNumber) {
 		if (issueNumber.contains("ASVP-")) {
@@ -44,4 +70,5 @@ public class Jira {
 	public static String GetJiraPathByType(JiraType jiraType) {
 		return new JiraPreferences().getJiraPath(jiraType);
 	}
+	
 }
