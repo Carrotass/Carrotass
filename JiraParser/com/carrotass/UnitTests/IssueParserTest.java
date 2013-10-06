@@ -1,7 +1,6 @@
 package com.carrotass.UnitTests;
 
-import static org.junit.Assert.*;
-
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,13 +25,15 @@ public class IssueParserTest extends TestCase
 	@Test
 	public void testParseInternalIssue() throws Exception
 	{
-		IssueParser ip = new IssueParser(".\\TestData\\InternalIssue.xml");
+		String pathSeparator = File.separator;
+		String filename = String.format(".%sTestData%sInternalIssue.xml", pathSeparator, pathSeparator);
+		IssueParser ip = new IssueParser(filename);
 		System.out.println(ip);
 		InternalIssue parsed = (InternalIssue)ip.Parse();
 		
 		assertEquals("ASV-14230", parsed.getKey());
-		assertEquals("Разрешен", parsed.getStatus());
-		assertEquals("Исправлено", parsed.getResolution());
+		assertEquals("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", parsed.getStatus());
+		assertEquals("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", parsed.getResolution());
 		assertEquals("p.brichev", parsed.getAssignee());
 		assertEquals("p.brichev", parsed.getReporter());
 
@@ -51,32 +52,34 @@ public class IssueParserTest extends TestCase
 		assertEquals("2.10.0.39", parsed.getFixVersion().get(0));
 		assertEquals(0, parsed.getTimeEstimate());
 		assertEquals(1800, parsed.getTimeSpent());
-		assertEquals("Ошибка кодирования", parsed.getIssueReason());
+		assertEquals("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", parsed.getIssueReason());
 	}
 	
 	@Test
 	public void testParseExternalIssue() throws Exception
 	{
-		IssueParser ip = new IssueParser(".\\TestData\\ExternalIssue.xml");
+		String pathSeparator = File.separator;
+		String filename = String.format(".%sTestData%sExternalIssue.xml", pathSeparator, pathSeparator);
+		IssueParser ip = new IssueParser(filename);
 		System.out.println(ip);
 		ExternalIssue parsed = (ExternalIssue)ip.Parse();
 		
 		assertEquals("ASVP-6533", parsed.getKey());
-		assertEquals("Разрешен", parsed.getStatus());
-		assertEquals("Исправлено", parsed.getResolution());
+		assertEquals("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", parsed.getStatus());
+		assertEquals("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", parsed.getResolution());
 		assertEquals("p.brichev", parsed.getAssignee());
 		assertEquals("n.grebennikova", parsed.getReporter());
 
 		Locale locale = new Locale("ru");
 		DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy kk:mm:ss zzzz", locale);
 		
-		Date createdDate = df.parse("Вт, 9 апр 2013 09:06:05 +0800");
+		Date createdDate = df.parse("пїЅпїЅ, 9 пїЅпїЅпїЅ 2013 09:06:05 +0800");
 		assertTrue(createdDate.equals(parsed.getCreated()));
 		
-		Date updatedDate = df.parse("Чт, 26 сен 2013 14:24:22 +0800");
+		Date updatedDate = df.parse("пїЅпїЅ, 26 пїЅпїЅпїЅ 2013 14:24:22 +0800");
 		assertTrue(updatedDate.equals(parsed.getUpdated()));
 		
-		Date resolvedDate = df.parse("Чт, 26 сен 2013 14:14:21 +0800");
+		Date resolvedDate = df.parse("пїЅпїЅ, 26 пїЅпїЅпїЅ 2013 14:14:21 +0800");
 		assertTrue(resolvedDate.equals(parsed.getResolved()));
 		
 		assertEquals(1, parsed.getFixVersion().size());
@@ -90,26 +93,28 @@ public class IssueParserTest extends TestCase
 	@Test
 	public void testParseRidjentIssue() throws Exception
 	{
-		IssueParser ip = new IssueParser(".\\TestData\\RidjentIssue.xml");
+		String pathSeparator = File.separator;
+		String filename = String.format(".%sTestData%sRidjentIssue.xml", pathSeparator, pathSeparator);
+		IssueParser ip = new IssueParser(filename);
 		System.out.println(ip);
 		RigentIssue parsed = (RigentIssue)ip.Parse();
 		
 		assertEquals("ASVR-161", parsed.getKey());
-		assertEquals("Решенные", parsed.getStatus());
-		assertEquals("Исправленный", parsed.getResolution());
+		assertEquals("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", parsed.getStatus());
+		assertEquals("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", parsed.getResolution());
 		assertEquals("p.brichev", parsed.getAssignee());
 		assertEquals("v.urbaeva", parsed.getReporter());
 
 		Locale locale = new Locale("ru");
 		DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy kk:mm:ss zzzz", locale);
 		
-		Date createdDate = df.parse("Ср, 4 сен 2013 15:23:49 +0800");
+		Date createdDate = df.parse("пїЅпїЅ, 4 пїЅпїЅпїЅ 2013 15:23:49 +0800");
 		assertTrue(createdDate.equals(parsed.getCreated()));
 		
-		Date updatedDate = df.parse("Чт, 19 сен 2013 10:48:15 +0800");
+		Date updatedDate = df.parse("пїЅпїЅ, 19 пїЅпїЅпїЅ 2013 10:48:15 +0800");
 		assertTrue(updatedDate.equals(parsed.getUpdated()));
 		
-		Date resolvedDate = df.parse("Чт, 12 сен 2013 19:32:23 +0800");
+		Date resolvedDate = df.parse("пїЅпїЅ, 12 пїЅпїЅпїЅ 2013 19:32:23 +0800");
 		assertTrue(resolvedDate.equals(parsed.getResolved()));
 		
 		assertEquals(2, parsed.getFixVersion().size());
@@ -118,7 +123,7 @@ public class IssueParserTest extends TestCase
 		assertEquals(0, parsed.getTimeEstimate());
 		assertEquals(14400, parsed.getTimeSpent());
 		assertEquals(0, parsed.getTimeOriginalEstimate());
-		assertEquals("Уточнение требования", parsed.getIssueReason());
+		assertEquals("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", parsed.getIssueReason());
 	}		
 	
 	

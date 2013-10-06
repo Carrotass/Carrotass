@@ -1,16 +1,14 @@
 package com.carrotass.parsers;
 
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import org.jdom2.*;
-import org.jdom2.input.SAXBuilder;
+import org.jdom2.Element;
 
-import com.carrotass.jira.Jira.JiraVersion;
 import com.carrotass.jira.Jira.JiraType;
-import com.carrotass.schemas.*;
+import com.carrotass.jira.Jira.JiraVersion;
+import com.carrotass.schemas.BaseIssue;
 
 
 public abstract class BaseJiraIssueParser 

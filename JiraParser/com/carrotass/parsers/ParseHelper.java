@@ -19,7 +19,7 @@ public class ParseHelper
 	{
 		Integer jiraVersion = GetJiraTypeByJiraVersion(version);
 		String jiraType = Jira.GetJiraTypeByJiraVersion(jiraVersion).toString();
-		Class schemaClass = Class.forName("com.carrotass.parsers." + jiraType + "IssueParser");
+		Class<?> schemaClass = Class.forName("com.carrotass.parsers." + jiraType + "IssueParser");
 		Object obj = schemaClass.newInstance();
 		return (BaseJiraIssueParser)obj;
 	}
