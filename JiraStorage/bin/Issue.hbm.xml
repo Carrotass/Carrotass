@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 08.10.2013 22:22:31 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.carrotass.models.Issue" table="ISSUE">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="increment" />
+        </id>
+        <property name="number" type="java.lang.String">
+            <column name="NUMBER" />
+        </property>
+        <property name="planAmount" type="int">
+            <column name="PLANAMOUNT" />
+        </property>
+        <property name="factAmount" type="int">
+            <column name="FACTAMOUNT" />
+        </property>
+        <property name="realAmount" type="int">
+            <column name="REALAMOUNT" />
+        </property>
+        <!-- 
+        <list name="resolveVersions" inverse="false" table="PROJECTVERSION" lazy="true">
+            <key>
+                <column name="ID" />
+            </key>
+            <list-index></list-index>
+            <one-to-many class="com.carrotass.models.ProjectVersion" />
+        </list> -->
+        <property name="createdOn" type="java.util.Date">
+            <column name="CREATEDON" />
+        </property>
+        <property name="resolvedOn" type="java.util.Date">
+            <column name="RESOLVEDON" />
+        </property>
+        <property name="updateOn" type="java.util.Date">
+            <column name="UPDATEON" />
+        </property>
+        <many-to-one name="createdBy" class="com.carrotass.models.User" fetch="join" cascade="save-update"  >
+            <column name="CREATEDBY" />
+        </many-to-one>
+        <many-to-one name="assignedTo" class="com.carrotass.models.User" fetch="join" cascade="save-update" >
+            <column name="ASSIGNEDTO" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
