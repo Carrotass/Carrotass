@@ -85,8 +85,12 @@ public abstract class BaseJiraIssueParser
 		List<Element> customValues = ParseHelper.GetCustomFieldValuesByName(customFields, BaseIssue.ISSUE_REASON_CUSTOM_FIELD_VALUE, BaseIssue.CUSTOM_FIELD_NAME_ELEMENT_NAME, BaseIssue.CUSTOM_FIELDS_VALUE_NAME);
 		if (customValues != null)
 		{
-			String reason = ParseHelper.GetEncodedStringValueFromElement(customValues.get(0), BaseIssue.CUSTOM_FIELD_VALUE_NAME, "windows-1251", "UTF-8");
-			this.ParsedIssue.setIssueReason(reason);
+			Element customElement = customValues.get(0);
+			if (customElement != null)
+			{
+				String reason = customElement.getChildText(BaseIssue.CUSTOM_FIELD_VALUE_NAME);
+				this.ParsedIssue.setIssueReason(reason);
+			}
 		}
 	}
 	

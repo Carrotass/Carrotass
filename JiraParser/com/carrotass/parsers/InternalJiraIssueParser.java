@@ -30,9 +30,14 @@ public class InternalJiraIssueParser extends BaseJiraIssueParser
 													InternalIssue.CUSTOM_FIELD_NAME_ELEMENT_NAME, 
 													InternalIssue.CUSTOM_FIELDS_VALUE_NAME);
 		
-		String resolvedDateString = ParseHelper.GetEncodedStringValueFromElement(customValues.get(0), InternalIssue.CUSTOM_FIELD_VALUE_NAME, "windows-1251", "UTF-8");
-		Date resolvedDate = ParseHelper.ConvertStringToDate(resolvedDateString, this.DateLocale);
-		this.ParsedIssue.setResolved(resolvedDate);
+		Element customElement = customValues.get(0);
+		if (customElement != null)
+		{
+			String resolvedDateString = customElement.getChildText(InternalIssue.CUSTOM_FIELD_VALUE_NAME);
+			Date resolvedDate = ParseHelper.ConvertStringToDate(resolvedDateString, this.DateLocale);
+			this.ParsedIssue.setResolved(resolvedDate);
+			
+		}
 	}
 	
 

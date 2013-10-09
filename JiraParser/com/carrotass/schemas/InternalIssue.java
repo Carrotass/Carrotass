@@ -7,5 +7,5 @@ public class InternalIssue extends BaseIssue
 		super();
 	}
 	
-	public static String RESOLVED_DATE_CUSTOM_FIELD_NAME = "Дата разрешения";
+	public static String RESOLVED_DATE_CUSTOM_FIELD_NAME = "Р”Р°С‚Р° СЂР°Р·СЂРµС€РµРЅРёСЏ";
 }

@@ -76,11 +76,6 @@ public class ParseHelper
     
     public static Date ConvertStringToDate(String dateString,Locale locale) throws Exception 
  	{
-    	if (locale.getLanguage().equals("ru"))
-    	{
-    		dateString = new String(dateString.getBytes("windows-1251"),"UTF-8");
-    	}
-    	
 	    DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy kk:mm:ss zzzz", locale);
 	    Date result = df.parse(dateString);
 	    return result;
@@ -106,17 +101,5 @@ public class ParseHelper
 			}
     	}
 		return customFieldValues;
-	}       
-    
-    public static String GetEncodedStringValueFromElement(Element element, String name, String baseEncode, String newEncode) throws Exception
-    {
-    	String encoded = "";
-    	if (element != null)
-    	{
-    		String res = element.getChildText(name);
-    		encoded = new String(res.getBytes(baseEncode),newEncode);
-    	}
-    	return encoded;
-    }
-    
+	}
 }

@@ -181,7 +181,7 @@ public class BaseIssue
 	
 	public static String TIME_ATTRIBUTE_NAME = "seconds";
 	
-	public static String ISSUE_REASON_CUSTOM_FIELD_VALUE = "Причина запроса";
+	public static String ISSUE_REASON_CUSTOM_FIELD_VALUE = "РџСЂРёС‡РёРЅР° Р·Р°РїСЂРѕСЃР°";
 	
 	public static String CUSTOM_FIELDS_ELEMENT_NAME = "customfields";
 	
@@ -198,10 +198,10 @@ public class BaseIssue
 	public void PrintElement() throws Exception
 	{
 		System.out.println("");
-		System.out.println("Номер запроса: " + this.key);
-		System.out.println("Статус запроса: " + this.status);
-		System.out.println("Резолюция запроса: " + this.resolution);
-		System.out.println("Причина запроса: " + this.issueReason);
+		System.out.println("РќРѕРјРµСЂ Р·Р°РїСЂРѕСЃР°: " + this.key);
+		System.out.println("РЎС‚Р°С‚СѓСЃ Р·Р°РїСЂРѕСЃР°: " + this.status);
+		System.out.println("Р РµР·РѕР»СЋС†РёСЏ Р·Р°РїСЂРѕСЃР°: " + this.resolution);
+		System.out.println("РџСЂРёС‡РёРЅР° Р·Р°РїСЂРѕСЃР°: " + this.issueReason);
 		
 		String FixVersions = "";
 		for (Integer j=0; j < this.fixVersion.size(); j++)
@@ -211,15 +211,15 @@ public class BaseIssue
 			
 			FixVersions = FixVersions + this.fixVersion.get(j).toString();
 		}
-		System.out.println("Исправить в версиях: " + FixVersions);
+		System.out.println("РСЃРїСЂР°РІРёС‚СЊ РІ РІРµСЂСЃРёСЏС…: " + FixVersions);
 		
-		System.out.println("Автор : " + this.reporter);
-		System.out.println("Исполнитель: " + this.assignee);
-		System.out.println("Дата создания: " + this.created);
-		System.out.println("Дата обновления: " + this.updated);
-		System.out.println("Дата разрешения: " + this.resolved);
-		System.out.println("Запланированное время: " + this.timeEstimate);
-		System.out.println("Потраченное время: " + this.timeSpent);
+		System.out.println("РђРІС‚РѕСЂ: " + this.reporter);
+		System.out.println("РСЃРїРѕР»РЅРёС‚РµР»СЊ: " + this.assignee);
+		System.out.println("Р”Р°С‚Р° СЃРѕР·РґР°РЅРёСЏ: " + this.created);
+		System.out.println("Р”Р°С‚Р° РѕР±РЅРѕРІР»РµРЅРёСЏ: " + this.updated);
+		System.out.println("Р”Р°С‚Р° СЂР°Р·СЂРµС€РµРЅРёСЏ: " + this.resolved);
+		System.out.println("РџР»Р°РЅРѕРІРѕРµ РІСЂРµРјСЏ: " + this.timeEstimate);
+		System.out.println("Р¤Р°РєС‚РёС‡РµСЃРєРѕРµ РІСЂРµРјСЏ: " + this.timeSpent);
 	}
 	
 }
