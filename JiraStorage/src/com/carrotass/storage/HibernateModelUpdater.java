@@ -41,52 +41,43 @@ public class HibernateModelUpdater implements ModelUpdater {
 		HibernateSessionHelper.getSessionFactory().close();
 		
 	}
-	@Override
 	public void CreateIssue(Issue issue) {
 		ModelUpdateHelper.SaveObject(issue);
 
 	}
 
-	@Override
 	public void UpdateIssue(Issue issue) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void DeleteIssue(Issue issue) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void CreateUser(User user) {
 		ModelUpdateHelper.SaveObject(user);
 	}
 
-	@Override
 	public void UpdateUser(User user) {
 		ModelUpdateHelper.SaveObject(user);	
 	}
 
-	@Override
 	public void DeleteUser(User user) {
 		ModelUpdateHelper.DeleteObject(user);
 	}
 
-	@Override
 	public void CreateProjectVersion(ProjectVersion version) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void UpdateProjectVersion(ProjectVersion version) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void DeleteProjectVersion(ProjectVersion version) {
 		// TODO Auto-generated method stub
 
