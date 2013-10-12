@@ -1,4 +1,4 @@
-package com.carrotass.UnitTests;
+package com.carrotass.unit_tests;
 
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;

@@ -1,6 +1,5 @@
-package com.carrotass.UnitTests;
+package com.carrotass.unit_tests;
 
-import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,8 +24,7 @@ public class IssueParserTest extends TestCase
 	@Test
 	public void testParseInternalIssue() throws Exception
 	{
-		String pathSeparator = File.separator;
-		String filename = String.format(".%sTestData%sInternalIssue.xml", pathSeparator, pathSeparator);
+		String filename = getClass().getResource("InternalIssue.xml").getPath();
 		IssueParser ip = new IssueParser(filename);
 		InternalIssue parsed = (InternalIssue)ip.Parse();
 		
@@ -57,17 +55,12 @@ public class IssueParserTest extends TestCase
 	@Test
 	public void testParseExternalIssue() throws Exception
 	{
-		String pathSeparator = File.separator;
-		String filename = String.format(".%sTestData%sExternalIssue.xml", pathSeparator, pathSeparator);
+		String filename = getClass().getResource("ExternalIssue.xml").getPath();
 		IssueParser ip = new IssueParser(filename);
-		System.out.println(ip);
 		ExternalIssue parsed = (ExternalIssue)ip.Parse();
 		
 		assertEquals("ASVP-6533", parsed.getKey());
 		assertEquals("Разрешен", parsed.getStatus());
-		
-		System.out.println(parsed.getResolution());
-		
 		assertEquals("Исправлено", parsed.getResolution());
 		assertEquals("p.brichev", parsed.getAssignee());
 		assertEquals("n.grebennikova", parsed.getReporter());
@@ -95,10 +88,8 @@ public class IssueParserTest extends TestCase
 	@Test
 	public void testParseRidjentIssue() throws Exception
 	{
-		String pathSeparator = File.separator;
-		String filename = String.format(".%sTestData%sRidjentIssue.xml", pathSeparator, pathSeparator);
+		String filename = getClass().getResource("RidjentIssue.xml").getPath();
 		IssueParser ip = new IssueParser(filename);
-		System.out.println(ip);
 		RigentIssue parsed = (RigentIssue)ip.Parse();
 		
 		assertEquals("ASVR-161", parsed.getKey());

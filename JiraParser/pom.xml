@@ -5,7 +5,6 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>JiraParser</name>
   <build>
-    <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -27,6 +26,12 @@
 	    <groupId>junit</groupId>
 	    <artifactId>junit</artifactId>
 	    <version>4.11</version>
+	</dependency>
+	<dependency>
+		<groupId>com.carrotass</groupId>
+		<artifactId>jira_common_package</artifactId>
+		<version>${project.version}</version>
+		<scope>compile</scope>
 	</dependency>
   </dependencies>
 </project>
